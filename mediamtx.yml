@@ -1,0 +1,22 @@
+hls: yes
+hlsAddress: :8888
+hlsAllowOrigins: ["*"]
+hlsAlwaysRemux: yes
+hlsVariant: mpegts
+
+rtsp: yes
+rtspAddress: :8554
+rtmp: no
+webrtc: no
+
+# Runtime API - the backend uses this to add/remove one path per camera
+# (see backend/src/services/mediaServer.js) instead of paths being hardcoded here.
+# Fixed internal port; nginx (see nginx.conf.template) proxies both this and HLS
+# out through Render's single public port, since Render only exposes one port
+# per service and the backend/media-server are separate Render services.
+api: yes
+apiAddress: :9997
+
+# No static paths: every camera's path (real or simulated) is registered
+# dynamically by the backend when the camera is added via the API.
+paths: {}
